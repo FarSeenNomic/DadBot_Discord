@@ -1,8 +1,8 @@
 import re
 from random import shuffle
-import discord
 import pickle
 import os
+import discord
 #permissions 201329664
 
 bot = discord.Client()
@@ -49,7 +49,7 @@ async def on_message(message):
         if message.author == message.guild.me:
             return
 
-        if lower(message.content) == "optin":
+        if message.content.lower() == "optin":
             if not optIN.get(message.author.id, False):
                 if not message.guild.me.top_role.permissions.manage_nicknames:
                     await message.channel.send("I cannot change nicknames, but I'll put you on the list.")
@@ -62,11 +62,11 @@ async def on_message(message):
                 pickle.dump(optOut, open("optOut.p", "wb"))
             return
 
-        if lower(message.content) == "optout":
+        if message.content.lower() == "optout":
             if optIN.get(message.author.id, False):
                 optIN.pop(message.author.id)
                 pickle.dump(optIN, open("optIN.p", "wb"))
-                if optIN[message.author.id] != message.author.display_name:
+                if optOut[message.author.id] != message.author.display_name:
                     await message.author.edit(nick=optOut[message.author.id], reason="DadBot")
             return
 
@@ -77,11 +77,11 @@ async def on_message(message):
             word = re.search(r'\bi\'?m\s+(\w+)', message.content, re.IGNORECASE)
         word = word.group(1)
 
-        if lower(word) == lower("DadBot"):
+        if word.lower() == "DadBot".lower():
             await message.channel.send("Wait, you're me?")
             return
 
-        if lower(word) == lower("Dad"):
+        if word.lower() == "Dad".lower():
             await message.channel.send("Wait, you're me?")
             return
 

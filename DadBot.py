@@ -70,11 +70,11 @@ async def on_message(message):
                     await message.author.edit(nick=optOut[message.author.id], reason="DadBot")
             return
 
-        word = re.search(r'\bi(\'|’)?m\s+(.*)', message.content, re.IGNORECASE)
+        word = re.search(r'\bi.?m\s+(.*)', message.content, re.IGNORECASE)
         if word is None:
             return
         if len(word.group(1)) > 32:
-            word = re.search(r'\bi(\'|’)?m\s+(\w+)', message.content, re.IGNORECASE)
+            word = re.search(r'\bi.?m\s+(\w+)', message.content, re.IGNORECASE)
         word = word.group(1)
 
         if word.lower() == "DadBot".lower():

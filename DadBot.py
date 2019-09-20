@@ -106,6 +106,8 @@ async def on_message(message):
                 #        " won't let me change their name."
                 #        " (It might be "+message.guild.owner.display_name+"'s fault)")
                 return
+            if message.author == message.guild.owner:
+                return
             if len(word) > 32:
                 word = word[:27] + "..."
             await message.author.edit(nick=word, reason="DadBot")

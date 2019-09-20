@@ -90,7 +90,7 @@ async def on_message(message):
         names.append(word)
         pickle.dump(names, open("names.p", "wb"))
 
-        if optIN.get(message.author.id, False):
+        if optIN.get(message.author.id, True):
             if not message.guild.me.top_role.permissions.manage_nicknames:
                 #await message.channel.send(
                 #    "Somebody named "+message.guild.owner.display_name+" won't let me change names.")
